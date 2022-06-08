@@ -1,15 +1,13 @@
 package io.codoctet.ikea.service;
 
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+import org.junit.platform.suite.api.SelectClasses;
+import org.junit.platform.suite.api.Suite;
+import org.junit.platform.suite.api.SuiteDisplayName;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-        FoodServiceTest.class,
-        FurnitureServiceTest.class,
-       // OrderServiceTest.class,
-       // QuoteService.class
-})
+
+@Suite
+@SuiteDisplayName("A demo Test Suite")
+@SelectClasses({FoodServiceTest.class,FurnitureServiceTest.class,OrderServiceTest.class,QuoteServiceTest.class})
 public class SuiteTests {
 }

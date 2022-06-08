@@ -1,25 +1,18 @@
 package io.codoctet.ikea.service;
 
-import io.codoctet.ikea.domain.Food;
 import io.codoctet.ikea.domain.Furniture;
-import io.codoctet.ikea.repository.FoodRepository;
 import io.codoctet.ikea.repository.FurnitureRepository;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.*;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class FurnitureServiceTest {
