@@ -5,11 +5,12 @@ import io.codoctet.ikea.repository.FoodRepository;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.*;
 
@@ -17,10 +18,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class FoodServiceTest {
+@SpringBootTest
+public class FoodServiceTest {
 
     @Mock
-    private FoodRepository foodRepository;
+     private FoodRepository foodRepository;
 
     @InjectMocks
     private FoodService foodService;
@@ -28,7 +30,7 @@ class FoodServiceTest {
 
     @Test
     @DisplayName("food_getAll_returnAllFromDB")
-    void food_getAll_returnAllFromDB(){
+    public void food_getAll_returnAllFromDB(){
 
         List<Food> foodList = new ArrayList<>();
         int intendedSize = 10;
@@ -44,7 +46,7 @@ class FoodServiceTest {
 
     @Test
     @DisplayName("food_getOne_returnOneFromDB")
-    void food_getOne_returnOneFromDB(){
+    public void food_getOne_returnOneFromDB(){
 
         Long expectedId = 1L;
         Optional<Food> expectedFood = Optional.ofNullable(Food.builder().id(expectedId).name("Boulette suédoise").price(15).build());
@@ -58,7 +60,7 @@ class FoodServiceTest {
 
     @Test
     @DisplayName("food_create_insertInDB")
-    void food_create_insertInDB(){
+    public void food_create_insertInDB(){
 
         Food inputFood = Food.builder().name("Boulette suédoise").price(15).build();
         Food expectedFood = Food.builder().id(1L).name("Boulette suédoise").price(15).build();
@@ -72,7 +74,7 @@ class FoodServiceTest {
 
     @Test
     @DisplayName("food_update_insertInDB")
-    void food_update_insertInDB(){
+    public void food_update_insertInDB(){
 
 
         Food expectedFood = Food.builder().id(1L).name("Boulette marocaine").price(39).build();
@@ -86,7 +88,7 @@ class FoodServiceTest {
 
     @Test
     @DisplayName("food_delete_deleteFromDB")
-    void food_delete_deleteFromDB(){
+    public void food_delete_deleteFromDB(){
 
         Long deleteId = 1L;
         doNothing().when(foodRepository).deleteById(deleteId);

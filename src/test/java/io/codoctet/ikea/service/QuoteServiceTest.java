@@ -2,6 +2,6 @@ package io.codoctet.ikea.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class QuoteServiceTest {
+public class QuoteServiceTest {
 
 }
