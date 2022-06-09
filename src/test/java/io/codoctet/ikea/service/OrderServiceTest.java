@@ -57,7 +57,7 @@ class OrderServiceTest {
         when(orderRepository.findById(expectedId)).thenReturn(expectedOrder);
         Order order = orderService.get(1L);
 
-        MatcherAssert.assertThat(order, Matchers.hasToString(expectedOrder.toString()));
+        MatcherAssert.assertThat(order, Matchers.hasToString(expectedOrder.get().toString()));
         verify(orderRepository).findById(expectedId);
     }
 

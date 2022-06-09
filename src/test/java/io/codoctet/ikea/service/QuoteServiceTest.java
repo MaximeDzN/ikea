@@ -52,7 +52,7 @@ public class QuoteServiceTest {
         when(quoteRepository.findById(expectedId)).thenReturn(expectedQuote);
         Quote quote = quoteService.get(1L);
 
-        MatcherAssert.assertThat(quote, Matchers.hasToString(expectedQuote.toString()));
+        MatcherAssert.assertThat(quote, Matchers.hasToString(expectedQuote.get().toString()));
         verify(quoteRepository).findById(expectedId);
     }
 
