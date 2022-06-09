@@ -16,7 +16,7 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class OrderServiceTest {
+public class OrderServiceTest {
 
     @Mock
     private OrderRepository orderRepository;
