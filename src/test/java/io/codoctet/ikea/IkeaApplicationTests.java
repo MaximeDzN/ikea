@@ -1,11 +1,9 @@
 package io.codoctet.ikea;
 
 import io.codoctet.ikea.service.SuiteTests;
-import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
-import org.springframework.boot.test.context.SpringBootTest;
 
 public class IkeaApplicationTests {
 

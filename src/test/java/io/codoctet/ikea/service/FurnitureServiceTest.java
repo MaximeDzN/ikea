@@ -44,7 +44,7 @@ public class FurnitureServiceTest {
     @DisplayName("furniture_getOne_returnOneFromDB")
     public void furniture_getOne_returnOneFromDB(){
 
-        Furniture furnitureInit = Furniture.builder().id((long) 1L).build();
+        Furniture furnitureInit = Furniture.builder().id(1L).build();
         when(furnitureRepository.findById(1L)).thenReturn(Optional.of(furnitureInit));
         Furniture furniture = furnitureService.get(1L);
 
