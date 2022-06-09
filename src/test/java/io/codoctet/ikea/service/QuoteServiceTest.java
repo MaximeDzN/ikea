@@ -52,7 +52,7 @@ public class QuoteServiceTest {
         when(quoteRepository.findById(expectedId)).thenReturn(expectedQuote);
         Quote quote = quoteService.get(1L);
 
-        MatcherAssert.assertThat(quote, Matchers.hasToString("Quote(id=1, date=Thu Jan 01 01:00:00 CET 1970, sum=150.0, furnitures=null)"));
+        MatcherAssert.assertThat(quote, Matchers.hasToString(expectedQuote.toString()));
         verify(quoteRepository).findById(expectedId);
     }
 
