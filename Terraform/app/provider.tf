@@ -1,3 +1,3 @@
 provider "aws" {
-  region                  = var.zone_dispo
+  region = var.zone_dispo
 }
