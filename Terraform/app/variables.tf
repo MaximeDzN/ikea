@@ -1,45 +1,32 @@
-variable "zone_dispo" {
+variable "secret_path" {
   type    = string
-  default = "us-east-1"
+  default = "<paste your secret path>"
 }
 
-variable "auteur" {
+variable "region" {
   type    = string
-  default = "groupe2"
+  default = "<paste your required region>"
 }
 
-variable "volume_id"{
+variable "author_name" {
   type = string
-  default = "vol-0c840123584a1acce"
 }
 
-variable "utilisateur_ssh" {
+variable "private_key_path" {
+  type = string
+}
+
+variable "instance_type" {
   type    = string
-  default = "ec2-user"
+  default = "t2.micro"
 }
 
-variable "cle_ssh" {
-  type    = string
-  default = "ikea"
+variable "ec2_avail_zone" {
+  type = string
 }
 
 
-variable "git_projet" {
-  type    = string
-  default = "ikea"
+variable "main_dir" {
+  type = string
 }
 
-variable "git_proprietaire" {
-  type    = string
-  default = "MaximeDzN"
-}
-
-variable "eip_id" {
-  type    = string
-  default = "eipalloc-0c3e555f3d6775361"
-}
-
-variable "public_ip" {
-  type    = string
-  default = "3.213.147.10"
-}
