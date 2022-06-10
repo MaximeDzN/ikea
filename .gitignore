@@ -31,6 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+/Terraform/flavien.pem
+/Terraform/secret.ini
 /Terraform/app/.terraform.lock.hcl
 /Terraform/ansible.cfg
 /Terraform/app/.terraform/modules/modules.json
