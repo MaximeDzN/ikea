@@ -10,11 +10,11 @@ resource "aws_instance" "ec2" {
   }
 
   provisioner "local-exec" {
-    command = "echo IP : ${var.public_ip}, ID: ${aws_instance.ec2.id}, Zone: ${aws_instance.ec2.availability_zone} >> private_data.txt"
+    command = "echo IP : ${var.public_ip}, ID: ${aws_instance.ec2.id}, Zone: ${aws_instance.ec2.availability_zone} > ${var.main_directory}/ip.host"
   }
   
   provisioner "local-exec" {
-    command = "echo '[webserver]\n${self.public_ip}' > ${var.main_directory}/hosts. &&  echo IP : ${var.public_ip},\n ID: ${aws_instance.ec2.id},\n Zone: ${aws_instance.ec2.availability_zone} > ${var.main_directory}/private_data.txt"
+    command = "echo '[webserver]\n${self.public_ip}' > ${var.main_directory}/hosts.ini"
 
   }
   
