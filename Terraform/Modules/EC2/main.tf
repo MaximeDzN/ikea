@@ -14,7 +14,7 @@ resource "aws_instance" "ec2" {
   }
   
   provisioner "local-exec" {
-    command = "echo '[webserver]\n${self.public_ip}' > ${var.main_directory}/hosts.ini"
+    command = "echo '[webserver]\n${var.public_ip}' > ${var.main_directory}/hosts.ini"
   }
   
   provisioner "remote-exec" {
