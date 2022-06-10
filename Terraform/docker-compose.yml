@@ -16,7 +16,7 @@ services:
   spring:
     container_name: springapp
     restart: always
-    image: course:latest
+    image: flav1ann/ikea:latest
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://docker-mysql/course?useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: spring
