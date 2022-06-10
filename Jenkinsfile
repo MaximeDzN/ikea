@@ -8,10 +8,9 @@ pipeline {
         registry = "flav1ann/ikea"
         registryCredential = 'dockerhub'
         dockerImage = ''
-        
-        
-        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        AWS     = credentials('AWS')
+        PERM    = credentials('PERM')
+        SSH    = credentials('SSH')
         
     }
     /*
@@ -19,6 +18,17 @@ pipeline {
         pollSCM '* * * * *'
     }*/
     stages {
+        stage('Cleaning') {
+            steps {
+                script {
+                    if(fileExists("Terraform/app")){
+                         dir("Terraform/app") {
+                    sh "terraform destroy --auto-approve"
+                }
+                    }
+                }
+            }
+        }
         stage('Checkout') {
             steps {
                 script {
@@ -32,7 +42,7 @@ pipeline {
                     echo 'repository clone on branch master done.'
                 }
             }
-            }
+        }
         stage('Compile') {
               agent {
                 docker { 
@@ -91,7 +101,6 @@ pipeline {
             steps {
                 script {
                     echo 'Pushing the docker image application builded to docker hub.'
-
                     docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
                     }
@@ -103,13 +112,43 @@ pipeline {
         stage('Remove Unused docker image') {
             steps{
                 sh "docker rmi $registry:latest"
+                sh "docker image rm \$(docker image ls -f 'dangling=true' -q)"
+
             }
         }
-        stage('Terraform init') {
+         stage('Terraform init') {
             steps {    
-                sh("pwd")
+                
                 dir("Terraform/app/") {
                     sh label: '' , script: 'terraform init'
+                }
+            }
+        }
+        stage('Terraform Plan') {
+            steps {
+                   dir("Terraform"){
+                       sh 'pwd'
+                    withCredentials([file(credentialsId: 'PERM', variable: 'pem')]) {
+                        sh 'touch ssh_key.pem'
+                        sh 'chmod 777 ssh_key.pem'
+                        sh 'cp $pem ssh_key.pem'
+                        sh 'chmod 400 ssh_key.pem'
+                    }
+                           withCredentials([file(credentialsId: 'AWS', variable: 'awsfile')]) {
+                        sh 'cp $awsfile secret.ini'
+                        sh 'chmod 777 secret.ini'
+                    }
+                    
+                }
+                dir("Terraform/app") {
+                    sh 'terraform plan'
+                }
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                dir("Terraform/app") {
+                    sh "terraform apply --auto-approve"
                 }
             }
         }
@@ -117,8 +156,21 @@ pipeline {
     
     post {
     failure {
-            echo 'J\'aime le paté !'
-              step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "jon.jolate@gmail.com", sendToIndividuals: true])
+        echo 'J\'aime le paté !'
+             dir("Terraform/app") {
+                    sh "terraform destroy --auto-approve"
+                }
+        step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "jon.jolate@gmail.com", sendToIndividuals: true])
+    }
+    aborted {
+               dir("Terraform/app") {
+                    sh "terraform destroy --auto-approve"
+                }
+    }
+    success{
+        dir("Terraform") {
+            sh "echo ip.host"
+        }
     }
 }
 }
