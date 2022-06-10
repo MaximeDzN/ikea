@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+/Terraform/app/.terraform.lock.hcl
+/Terraform/ansible.cfg
+/Terraform/app/.terraform/modules/modules.json
+/Terraform/app/private_data.txt
+/Terraform/app/.terraform/providers/registry.terraform.io/hashicorp/aws/3.72.0/linux_amd64/terraform-provider-aws_v3.72.0_x5
